@@ -7,11 +7,19 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      APPLITOOLS_API_KEY: l2bVxyHF8Ur9wqReXWkbvWrgbGnTWIjYPLfFkmH106wco110
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+    - name: Validate Applitools API key
+      run: |
+        if [ -z "$APPLITOOLS_API_KEY" ]; then
+          echo "APPLITOOLS_API_KEY is not configured in GitHub Secrets or Variables."
+          exit 1
+        fi
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
