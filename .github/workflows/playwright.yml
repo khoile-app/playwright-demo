@@ -8,7 +8,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-      APPLITOOLS_API_KEY: ${{ secrets.APPLITOOLS_API_KEY || vars.APPLITOOLS_API_KEY }}
+      APPLITOOLS_API_KEY: l2bVxyHF8Ur9wqReXWkbvWrgbGnTWIjYPLfFkmH106wco110
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
