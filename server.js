@@ -10,11 +10,16 @@ app.get('/', (req, res) => {
         <title>Login Page</title>
         <style>
           body { font-family: Arial, sans-serif; margin: 40px; }
+          h1 { font-family: 'Georgia', serif; text-decoration: underline; }
           form { max-width: 280px; display: flex; flex-direction: column; gap: 12px; }
-          label { font-weight: bold; }
+          label {
+            font-weight: bold;
+            font-family: 'Trebuchet MS', sans-serif;
+            text-decoration: underline;
+          }
           input { padding: 8px; }
           button {
-            background-color: #28a745;
+            background-color: #007bff;
             color: white;
             border: none;
             padding: 10px 14px;
