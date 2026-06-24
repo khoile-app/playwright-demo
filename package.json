@@ -15,6 +15,7 @@
     "express": "^5.2.1"
   },
   "devDependencies": {
+    "@applitools/eyes-playwright": "^1.47.9",
     "@playwright/test": "^1.61.1",
     "@types/node": "^26.0.0"
   }
