@@ -1,5 +1,19 @@
 const { test, expect } = require('@playwright/test');
 const { Eyes, Target } = require('@applitools/eyes-playwright');
+import { BatchClose } from '@applitools/eyes-playwright';
+
+// Execute this in your Playwright global teardown or afterAll hook
+async function closeMyBatch() {
+  const batchId = process.env.APPLITOOLS_BATCH_ID; // Or your custom unique batch ID
+
+  if (batchId) {
+    const batchClose = new BatchClose();
+    
+    // Explicitly target your batch and trigger the close signal
+    await batchClose.setBatchId(batchId).close();
+    console.log(`Batch ${batchId} closed successfully.`);
+  }
+}
 
 async function runVisualTest(page, testInfo, callback) {
   const eyes = new Eyes();
@@ -9,6 +23,7 @@ async function runVisualTest(page, testInfo, callback) {
   try {
     await callback(eyes);
     await eyes.close();
+    await closeMyBatch();
   } catch (error) {
     await eyes.abortIfNotClosed();
     throw error;
