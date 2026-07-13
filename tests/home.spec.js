@@ -4,13 +4,15 @@ import { BatchClose } from '@applitools/eyes-playwright';
 
 // Execute this in your Playwright global teardown or afterAll hook
 async function closeMyBatch() {
-  const batchId = process.env.APPLITOOLS_BATCH_ID; // Or your custom unique batch ID
+  const batchId = process.env.APPLITOOLS_BATCH_ID;
 
   if (batchId) {
     const batchClose = new BatchClose();
     
-    // Explicitly target your batch and trigger the close signal
-    await batchClose.setBatchId(batchId).close();
+    // FIX 1: Change to setBatchIds
+    // FIX 2: Wrap the batchId string inside an array []
+    await batchClose.setBatchIds([batchId]).close();
+    
     console.log(`Batch ${batchId} closed successfully.`);
   }
 }
