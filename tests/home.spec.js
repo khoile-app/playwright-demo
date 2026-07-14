@@ -31,7 +31,7 @@ async function runVisualTest(page, testInfo, callback) {
 
   try {
     await callback(eyes);
-    await eyes.close();
+    await eyes.close(false);
     await closeMyBatch();
   } catch (error) {
     await eyes.abortIfNotClosed();
