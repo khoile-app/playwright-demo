@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APPLITOOLS_API_KEY: l2bVxyHF8Ur9wqReXWkbvWrgbGnTWIjYPLfFkmH106wco110
-      APPLITOOLS_BATCH_ID: ${{ github.sha }}
+      APPLITOOLS_BATCH_ID: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
