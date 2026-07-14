@@ -1,5 +1,5 @@
 const { test, expect } = require('@playwright/test');
-const { Eyes, Target, BatchClose } = require('@applitools/eyes-playwright');
+const { Eyes, Target, BatchClose, VisualGridRunner } = require('@applitools/eyes-playwright');
 
 const sharedBatchName = process.env.APPLITOOLS_BATCH_NAME || 'playwright-demo';
 const sharedBatchId = process.env.APPLITOOLS_BATCH_ID;
@@ -14,7 +14,8 @@ async function closeMyBatch() {
 }
 
 async function runVisualTest(page, testInfo, callback) {
-  const eyes = new Eyes();
+  const runner = new VisualGridRunner();
+  const eyes = new Eyes(runner);
   eyes.setBatch(sharedBatchName, sharedBatchId);
 
   const eyesConfig = {
