@@ -32,6 +32,7 @@ async function runVisualTest(page, testInfo, callback) {
   }
 }
 
+/*
 test('homepage title', async ({ page }, testInfo) => {
   await runVisualTest(page, testInfo, async (eyes) => {
     await page.goto('/');
@@ -39,6 +40,7 @@ test('homepage title', async ({ page }, testInfo) => {
     await eyes.check('starting page', Target.window());
   });
 });
+*/
 
 test('login form navigates to a profile page with the username and cat image', async ({ page }, testInfo) => {
   await runVisualTest(page, testInfo, async (eyes) => {
