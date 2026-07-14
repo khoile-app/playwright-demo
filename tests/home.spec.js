@@ -22,6 +22,7 @@ async function runVisualTest(page, testInfo, callback) {
   config.setViewportSize({ width: 1280, height: 720 });
   config.addBrowser(1280, 720, 'firefox');
   config.addBrowser(1280, 720, 'safari');
+  config.addBrowser(1280, 720, 'chrome');
   config.setBatch({ name: sharedBatchName, id: sharedBatchId });
 
   const eyes = new Eyes(runner, config);
