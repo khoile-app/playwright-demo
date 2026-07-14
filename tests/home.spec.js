@@ -1,26 +1,33 @@
 const { test, expect } = require('@playwright/test');
-const { Eyes, Target } = require('@applitools/eyes-playwright');
-import { BatchClose } from '@applitools/eyes-playwright';
+const { Eyes, Target, BatchClose } = require('@applitools/eyes-playwright');
+
+const sharedBatchName = process.env.APPLITOOLS_BATCH_NAME || 'playwright-demo';
+const sharedBatchId = process.env.APPLITOOLS_BATCH_ID;
 
 // Execute this in your Playwright global teardown or afterAll hook
 async function closeMyBatch() {
-  const batchId = process.env.APPLITOOLS_BATCH_ID;
-
-  if (batchId) {
+  if (sharedBatchId) {
     const batchClose = new BatchClose();
-    
-    // FIX 1: Change to setBatchIds
-    // FIX 2: Wrap the batchId string inside an array []
-    await batchClose.setBatchIds([batchId]).close();
-    
-    console.log(`Batch ${batchId} closed successfully.`);
+    await batchClose.setBatchIds([sharedBatchId]).close();
+    console.log(`Batch ${sharedBatchId} closed successfully.`);
   }
 }
 
 async function runVisualTest(page, testInfo, callback) {
   const eyes = new Eyes();
+  eyes.setBatch(sharedBatchName, sharedBatchId);
 
-  await eyes.open(page, 'playwright-demo', testInfo.title, { width: 1280, height: 720 });
+  const eyesConfig = {
+    appName: 'playwright-demo',
+    testName: testInfo.title,
+    viewportSize: { width: 1280, height: 720 },
+    browsersInfo: [
+      { width: 1280, height: 720, name: 'firefox' },
+      { width: 1280, height: 720, name: 'safari' },
+    ],
+  };
+
+  await eyes.open(page, eyesConfig);
 
   try {
     await callback(eyes);
