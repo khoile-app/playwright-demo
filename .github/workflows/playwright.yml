@@ -7,17 +7,30 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      APPLITOOLS_API_KEY: l2bVxyHF8Ur9wqReXWkbvWrgbGnTWIjYPLfFkmH106wco110
+      APPLITOOLS_READ_KEY: l2bVxyHF8Ur9wqReXWkbvWrgbGnTWIjYPLfFkmH106wco110
+      APPLITOOLS_WRITE_KEY: l2bVxyHF8Ur9wqReXWkbvWrgbGnTWIjYPLfFkmH106wco110
+      APPLITOOLS_BATCH_ID: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
+    - name: Validate Applitools API key
+      run: |
+        if [ -z "$APPLITOOLS_API_KEY" ]; then
+          echo "APPLITOOLS_API_KEY is not configured in GitHub Secrets or Variables."
+          exit 1
+        fi
+#    - name: Configure git to use HTTPS with token for private deps
+#      run: git config --global url."https://${{ secrets.GH_TOKEN }}@github.com/".insteadOf "ssh://git@github.com/"
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: Start Application
-      run: npm start & npx wait-on http://localhost:3000
+#    - name: Start Application
+#      run: npm start & npx wait-on http://localhost:3000
     - name: Run Playwright tests
       run: npm run test:e2e
     - uses: actions/upload-artifact@v4
