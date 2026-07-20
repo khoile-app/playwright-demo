@@ -4,6 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "node -e \"require('fs').copyFileSync(require('path').join(process.cwd(),'..','..','..','sessions','dom-search.md'), require('path').join(process.cwd(),'dom-search.md'))\"",
+    "pretest": "npm run build",
     "test": "vitest run"
   },
   "devDependencies": {

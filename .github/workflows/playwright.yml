@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       APPLITOOLS_API_KEY: l2bVxyHF8Ur9wqReXWkbvWrgbGnTWIjYPLfFkmH106wco110
+      APPLITOOLS_READ_KEY: l2bVxyHF8Ur9wqReXWkbvWrgbGnTWIjYPLfFkmH106wco110
+      APPLITOOLS_WRITE_KEY: l2bVxyHF8Ur9wqReXWkbvWrgbGnTWIjYPLfFkmH106wco110
       APPLITOOLS_BATCH_ID: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
     - uses: actions/checkout@v4
