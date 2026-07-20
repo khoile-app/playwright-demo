@@ -23,8 +23,8 @@ jobs:
           echo "APPLITOOLS_API_KEY is not configured in GitHub Secrets or Variables."
           exit 1
         fi
-    - name: Configure git to use HTTPS with token for private deps
-      run: git config --global url."https://${{ secrets.GH_TOKEN }}@github.com/".insteadOf "ssh://git@github.com/"
+#    - name: Configure git to use HTTPS with token for private deps
+#      run: git config --global url."https://${{ secrets.GH_TOKEN }}@github.com/".insteadOf "ssh://git@github.com/"
     - name: Install dependencies
       run: npm ci
     - name: Install Playwright Browsers

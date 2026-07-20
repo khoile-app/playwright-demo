@@ -17,10 +17,6 @@
   "devDependencies": {
     "@applitools/eyes-playwright": "^1.47.11",
     "@playwright/test": "^1.61.1",
-    "@types/node": "^26.0.0",
-    "adams-skills": "github:applitools/adams-skills"
-  },
-  "adams-skills": {
-    "setup-skills": true
+    "@types/node": "^26.0.0"
   }
 }
